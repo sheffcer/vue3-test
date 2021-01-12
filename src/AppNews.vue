@@ -1,7 +1,7 @@
 <template>
 <div class="card">
   <h3>{{title}}</h3>
-  <button class="btn" @click="open">
+  <button class="btn" @click="open" :class="{ danger : isOpenLocal }">
     {{isOpenLocal ? 'Закрыть' : 'Открыть'}}
   </button>
   <p v-if="isOpenLocal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, optio!</p>
@@ -46,6 +46,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="css" scoped>
+  .btn--close {
+    color: red;
+    border: 1px solid red;
+    transition: all 0.22s;
+  }
 </style>
