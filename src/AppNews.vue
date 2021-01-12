@@ -4,7 +4,12 @@
   <button class="btn" @click="open" :class="{ danger : isOpenLocal }">
     {{isOpenLocal ? 'Закрыть' : 'Открыть'}}
   </button>
-  <p v-if="isOpenLocal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, optio!</p>
+  <button
+  class="btn"
+  v-if="isOpenLocal"
+  @click="read"
+  >{{!isLocalMarked ? 'Пометить как прочитанное' : 'Прочитано'}}</button>
+  <p v-if="isOpenLocal">{{text}}</p>
 </div>
 </template>
 
@@ -12,6 +17,10 @@
 export default {
   props: {
     title: {
+      type: String,
+      required: true
+    },
+    text: {
       type: String,
       required: true
     },
@@ -32,7 +41,8 @@ export default {
   data () {
     return {
       item: 'item string',
-      isOpenLocal: this.isOpen
+      isOpenLocal: this.isOpen,
+      isLocalMarked: false
     }
   },
   methods: {
@@ -40,6 +50,12 @@ export default {
       this.isOpenLocal = !this.isOpenLocal
       if (this.isOpenLocal) {
         this.$emit('open-news') // название события отправляемого наверх
+      }
+    },
+    read () {
+      this.isLocalMarked = !this.isLocalMarked
+      if (this.isLocalMarked) {
+        this.$emit('mark-read')
       }
     }
   }
