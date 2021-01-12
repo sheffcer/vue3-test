@@ -1,14 +1,20 @@
 <template>
 <div class="card">
   <h3>{{title}}</h3>
-  <button class="btn" @click="open" :class="{ danger : isOpenLocal }">
+  <button
+  class="btn"
+  @click="open"
+  :class="{ 'btn--close' : isOpenLocal }"
+  >
     {{isOpenLocal ? 'Закрыть' : 'Открыть'}}
   </button>
   <button
   class="btn"
   v-if="isOpenLocal"
+  :class="{ 'btn--close' : isLocalMarked }"
   @click="read"
-  >{{!isLocalMarked ? 'Пометить как прочитанное' : 'Прочитано'}}</button>
+  >{{!isLocalMarked ? 'Пометить как прочитанное' : 'Прочитано'}}
+  </button>
   <p v-if="isOpenLocal">{{text}}</p>
 </div>
 </template>
