@@ -12,6 +12,7 @@
       :text="item.text"
       :id="item.id"
       :is-open="item.isOpen"
+      :was-read="item.wasRead"
       @open-news="openNews"
       @mark-read="markedNews"
       ></app-news>
@@ -31,19 +32,22 @@ export default {
           id: 1,
           title: 'Киев попал в сотню самых зеленых городов мира',
           text: 'Часть городских зеленых насаждений в украинской столице составляет 44%, что дало возможность городу занять сотое место в списке самых зеленых городов мира',
-          isOpen: false
+          isOpen: false,
+          wasRead: false
         },
         {
           id: 2,
           title: 'Роналду - лучший бомбардир национальных чемпионатов в XXI веке',
           text: 'Португалец забил 462 гола в XXI веке. Звездный форвард Ювентуса Криштиану Роналду был назван лучшим бомбардиром мировых лиг в XXI веке по версии Международной федерации футбольной истории и статистики (IFFHS)',
-          isOpen: false
+          isOpen: false,
+          wasRead: false
         },
         {
           id: 3,
           title: 'Капитолий огородят во время инаугурации Байдена',
           text: 'На территорию Капитолия смогут попасть только приглашенные лица, которые имеют билеты. Вход для остальной публики будет закрыт',
-          isOpen: false
+          isOpen: false,
+          wasRead: false
         }
       ]
     }
@@ -55,8 +59,12 @@ export default {
     openNews () {
       this.openRate++
     },
-    markedNews () {
+    markedNews (id) {
       this.marked++
+      // console.log(id)
+      const idx = this.news.findIndex(news => news.id === id)
+      this.news[idx].wasRead = true
+      console.log(idx)
     }
   }
 }

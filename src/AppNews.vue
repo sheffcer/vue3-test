@@ -8,20 +8,23 @@
   >
     {{isOpenLocal ? 'Закрыть' : 'Открыть'}}
   </button>
+  <div v-if="isOpenLocal">
+  <p>{{text}}</p>
   <button
   class="btn"
-  v-if="isOpenLocal"
+  v-if="!wasRead"
   :class="{ 'btn--close' : isLocalMarked }"
   @click="read"
   >{{!isLocalMarked ? 'Пометить как прочитанное' : 'Прочитано'}}
   </button>
-  <p v-if="isOpenLocal">{{text}}</p>
+  </div>
 </div>
 </template>
 
 <script>
 export default {
   props: {
+    wasRead: Boolean,
     title: {
       type: String,
       required: true
@@ -39,7 +42,7 @@ export default {
       required: false,
       default: false,
       validator (value) {
-        console.log(value)
+        // console.log(value)
         return true
       }
     }
@@ -59,10 +62,10 @@ export default {
       }
     },
     read () {
-      this.isLocalMarked = !this.isLocalMarked
-      if (this.isLocalMarked) {
-        this.$emit('mark-read')
-      }
+      this.isOpenLocal = !this.isOpenLocal
+      // if (this.wasRead) {
+      this.$emit('mark-read', this.id)
+      // }
     }
   }
 }
