@@ -3,7 +3,7 @@
     <div class="card">
       <h2>Актуальные новости  {{now}}</h2>
       <span>Открыто раз: {{openRate}}</span>
-      <span>Прочитано раз: {{marked}}</span>
+      <span> Прочитано раз: {{marked}}</span>
     </div>
       <app-news
       v-for="item in news"
@@ -15,6 +15,7 @@
       :was-read="item.wasRead"
       @open-news="openNews"
       @mark-read="markedNews"
+      @unmark-read="unmarkedNews"
       ></app-news>
   </div>
 </template>
@@ -64,6 +65,12 @@ export default {
       // console.log(id)
       const idx = this.news.findIndex(news => news.id === id)
       this.news[idx].wasRead = true
+      console.log(idx)
+    },
+    unmarkedNews (id) {
+      this.marked--
+      const idx = this.news.findIndex(news => news.id === id)
+      this.news[idx].wasRead = false
       console.log(idx)
     }
   }

@@ -11,6 +11,13 @@
   <div v-if="isOpenLocal">
   <p>{{text}}</p>
   <button
+  class="btn danger"
+  v-if="wasRead"
+  @click="unmark"
+  >
+    Отметить как непрочитанным
+  </button>
+  <button
   class="btn"
   v-if="!wasRead"
   :class="{ 'btn--close' : isLocalMarked }"
@@ -23,6 +30,23 @@
 
 <script>
 export default {
+  emits: {
+    'open-news': null,
+    'mark-read' (id) {
+      if (id) {
+        return true
+      }
+      console.log('нет валидируемого параметра для данного $emit ')
+      return false
+    },
+    'unmark-read' (id) {
+      if (id) {
+        return true
+      }
+      console.log('нет валидируемого параметра для данного $emit ')
+      return false
+    }
+  },
   props: {
     wasRead: Boolean,
     title: {
@@ -66,6 +90,9 @@ export default {
       // if (this.wasRead) {
       this.$emit('mark-read', this.id)
       // }
+    },
+    unmark () {
+      this.$emit('unmark-read', this.id)
     }
   }
 }
