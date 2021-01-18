@@ -1,13 +1,19 @@
 <template>
   <div>
-    <button class=btn></button>
+    <button class="btn" :class="color" @click="$emit('action')">
+      <slot/>
+    </button>
   </div>
 </template>
 
 <script>
-  export default {
-    props: {
-    text: String,
+export default {
+  emits: ['action'],
+  props: {
+    text: {
+      type: String,
+      required: true
+    },
     color: {
       type: String,
       default: '',
@@ -15,8 +21,8 @@
         return ['', 'primary', 'danger'].includes(value)
       }
     }
-    }
   }
+}
 </script>
 
 <style lang="scss" scoped>

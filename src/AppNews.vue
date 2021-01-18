@@ -1,34 +1,33 @@
 <template>
 <div class="card">
   <h3>{{title}}</h3>
-  <button
-  class="btn"
-  @click="open"
+  <app-button
+  @action="open"
   :class="{ 'btn--close' : isOpenLocal }"
   >
-    {{isOpenLocal ? 'Закрыть' : 'Открыть'}}
-  </button>
+  {{isOpenLocal ? 'Закрыть' : 'Открыть'}}
+  </app-button>
   <div v-if="isOpenLocal">
   <p>{{text}}</p>
-  <button
-  class="btn danger"
+  <app-button
   v-if="wasRead"
-  @click="unmark"
-  >
-    Отметить как непрочитанным
-  </button>
-  <button
-  class="btn"
+  color="danger"
+  @action="unmark"
+  >Отметить как непрочитанным
+  </app-button>
+  <app-button
   v-if="!wasRead"
-  :class="{ 'btn--close' : isLocalMarked }"
-  @click="read"
-  >{{!isLocalMarked ? 'Пометить как прочитанное' : 'Прочитано'}}
-  </button>
+  color="primary"
+  @action="read"
+  >
+  {{!isLocalMarked ? 'Пометить как прочитанное' : 'Прочитано'}}
+  </app-button>
   </div>
 </div>
 </template>
 
 <script>
+import AppButton from './AppButton.vue'
 export default {
   emits: {
     'open-news': null,
@@ -94,14 +93,17 @@ export default {
     unmark () {
       this.$emit('unmark-read', this.id)
     }
+  },
+  components: {
+    AppButton
   }
 }
 </script>
 
 <style lang="css" scoped>
   .btn--close {
-    color: red;
+    /* color: red;
     border: 1px solid red;
-    transition: all 0.22s;
+    transition: all 0.22s; */
   }
 </style>
