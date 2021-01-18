@@ -22,12 +22,14 @@
   >
   {{!isLocalMarked ? 'Пометить как прочитанное' : 'Прочитано'}}
   </app-button>
+  <app-news-list ></app-news-list>
   </div>
 </div>
 </template>
 
 <script>
 import AppButton from './AppButton.vue'
+import AppNewsList from './AppNewsList.vue'
 export default {
   emits: {
     'open-news': null,
@@ -95,7 +97,8 @@ export default {
     }
   },
   components: {
-    AppButton
+    AppButton,
+    AppNewsList
   }
 }
 </script>

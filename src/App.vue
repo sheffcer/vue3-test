@@ -56,6 +56,12 @@ export default {
   components: {
     AppNews
   },
+  provide () {
+    return {
+      title: 'Список всех новостей',
+      news: this.news
+    }
+  },
   methods: {
     openNews () {
       this.openRate++
