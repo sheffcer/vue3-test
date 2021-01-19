@@ -16,12 +16,26 @@
         :color="active === 'three' ? 'primary' : ''"
         @action="active = 'three'">
         three tab </app-button>
+        </div>
+        <app-text-one
+        v-if="active === 'one'"
+        style="display:block"
+        ></app-text-one>
+        <app-text-two
+        v-else-if="active === 'two'"
+        style="display:block"
+        ></app-text-two>
+        <app-text-three
+        v-else-if="active === 'three'"
+        style="display:block"></app-text-three>
       </div>
-    </div>
   </div>
 </template>
 <script>
 import AppButton from './AppButton'
+import AppTextOne from './components/AppTextOne'
+import AppTextTwo from './components/AppTextTwo'
+import AppTextThree from './components/AppTextThree'
 export default {
   data () {
     return {
@@ -29,7 +43,10 @@ export default {
     }
   },
   components: {
-    AppButton
+    AppButton,
+    AppTextOne,
+    AppTextTwo,
+    AppTextThree
   }
 }
 </script>

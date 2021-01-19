@@ -192,4 +192,5 @@ h3 {
 
 .tabs {
     display: flex;
+    margin-bottom: 25px;
 }
