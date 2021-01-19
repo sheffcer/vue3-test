@@ -1,34 +1,35 @@
 <template>
   <div class="container pt-1">
     <div class="card">
-      <h2>Слоты</h2>
-      <app-list>
-        <template #default="slotProps">
-          <span style="color: orange">
-            <strong>{{slotProps.idx}}</strong>
-            {{slotProps.iter}}</span>
-        </template>
-      </app-list>
-      <app-block>
-        <p>Mazafaka!!!</p>
-        <template v-slot:header>
-        <h3>Заголовок</h3>
-        </template>
-        <template #footer>
-          <hr/>
-          <small>Футер</small>
-        </template>
-      </app-block>
+      <h2>Табы</h2>
+      <div class="tabs">
+        <app-button
+        :color="active === 'one' ? 'primary' : ''"
+        @action="active = 'one'"
+          >one tab
+        </app-button>
+        <app-button
+        :color="active === 'two' ? 'primary' : ''"
+        @action="active = 'two'"
+        >two tab </app-button>
+        <app-button
+        :color="active === 'three' ? 'primary' : ''"
+        @action="active = 'three'">
+        three tab </app-button>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import AppBlock from './AppBlock'
-import AppList from './AppList'
+import AppButton from './AppButton'
 export default {
+  data () {
+    return {
+      active: 'one'
+    }
+  },
   components: {
-    AppBlock,
-    AppList
+    AppButton
   }
 }
 </script>
