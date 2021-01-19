@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form class="card" :submit="submitHeandler">
+    <form class="card" @submit.prevent="submitHeandler">
       <h1>Анкета на Vue разработчика!</h1>
       <div class="form-control">
         <label for="name">Как тебя зовут?</label>
@@ -64,8 +64,8 @@ export default {
     AppButton
   },
   methods: {
-    submitHeandler (evt) {
-      evt.preventDefault()
+    submitHeandler () {
+      // evt.preventDefault()
       console.log('отправка формы')
     }
   }
