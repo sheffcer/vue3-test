@@ -4,45 +4,72 @@
       <h1>Анкета на Vue разработчика!</h1>
       <div class="form-control">
         <label for="name">Как тебя зовут?</label>
-        <input type="text" id="name" placeholder="Введи имя">
+        <input
+        v-model.trim="name"
+        type="text"
+        id="name"
+        placeholder="Введи имя">
       </div>
 
       <div class="form-control">
         <label for="age">Выбери возраст</label>
-        <input type="number" id="age" value="20">
+        <input
+        v-model.number="age"
+        ref="inputName"
+        type="number"
+        id="age"
+        >
       </div>
 
       <div class="form-control">
         <label for="city">Твой город</label>
-        <select id="city">
+        <select id="city" v-model="city">
           <option value="spb">Санкт-Петербург</option>
           <option value="msk">Москва</option>
           <option value="kzn">Казань</option>
-          <option selected value="nsk">Новосибирск</option>
+          <option value="nsk">Новосибирск</option>
         </select>
       </div>
 
       <div class="form-checkbox">
         <span class="label">Готов к переезду в Токио?</span>
         <div class="checkbox">
-          <label><input type="radio" name="trip"/> Да</label>
+          <label><input type="radio" name="trip" v-model="relocate" value="yes"/> Да</label>
         </div>
 
         <div class="checkbox">
-          <label><input type="radio" name="trip"/> Нет</label>
+          <label><input type="radio" name="trip" v-model="relocate" value="no"/> Нет</label>
         </div>
       </div>
 
       <div class="form-checkbox">
         <span class="label">Что знаешь во Vue?</span>
         <div class="checkbox">
-          <label><input type="checkbox"/> Vuex</label>
+          <label><input
+          type="checkbox"
+          name="skills"
+          v-model="skills"
+          value="vuex"/> Vuex</label>
         </div>
         <div class="checkbox">
-          <label><input type="checkbox"/> Vue CLI</label>
+          <label><input
+          type="checkbox"
+          name="skills"
+          v-model="skills"
+          value="cli"/> Vue CLI</label>
         </div>
         <div class="checkbox">
-          <label><input type="checkbox"/> Vue Router</label>
+          <label><input
+          type="checkbox"
+          name="skills"
+          v-model="skills"
+          value="router"/> Vue Router</label>
+        </div>
+      </div>
+      <div class="form-checkbox">
+        <span class="label">Соглашаюсь с уловиями</span>
+        <div class="checkbox">
+          <label><input type="checkbox" v-model="agree"/>Да</label>
         </div>
       </div>
 
@@ -57,6 +84,12 @@ import AppButton from './AppButton.vue'
 export default {
   data () {
     return {
+      name: '',
+      age: 33,
+      city: 'msk',
+      relocate: null,
+      skills: [],
+      agree: false,
       submit: 'Отправить'
     }
   },
@@ -66,7 +99,15 @@ export default {
   methods: {
     submitHeandler () {
       // evt.preventDefault()
-      console.log('отправка формы')
+      console.group('Form Data')
+      console.log('Имя: ', this.name)
+      console.log('Имя ref: ', this.$refs.inputName.value)
+      console.log('Возраст: ', this.age)
+      console.log('Город: ', this.city)
+      console.log('Релокейт: ', this.relocate)
+      console.log('Скилы: ', this.skills)
+      console.log('Согласен: ', this.agree)
+      console.groupEnd()
     }
   }
 }
