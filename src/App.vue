@@ -2,13 +2,14 @@
   <div class="container">
     <form class="card" @submit.prevent="submitHeandler">
       <h1>Анкета на Vue разработчика!</h1>
-      <div class="form-control">
+      <div class="form-control" :class="{invalid: errors.name}">
         <label for="name">Как тебя зовут?</label>
         <input
         v-model.trim="name"
         type="text"
         id="name"
         placeholder="Введи имя">
+        <small v-if="errors.name">{{errors.name}}</small>
       </div>
 
       <div class="form-control">
@@ -90,7 +91,10 @@ export default {
       relocate: null,
       skills: [],
       agree: false,
-      submit: 'Отправить'
+      submit: 'Отправить',
+      errors: {
+        name: null
+      }
     }
   },
   components: {
@@ -99,20 +103,39 @@ export default {
   methods: {
     submitHeandler () {
       // evt.preventDefault()
-      console.group('Form Data')
-      console.log('Имя: ', this.name)
-      console.log('Имя ref: ', this.$refs.inputName.value)
-      console.log('Возраст: ', this.age)
-      console.log('Город: ', this.city)
-      console.log('Релокейт: ', this.relocate)
-      console.log('Скилы: ', this.skills)
-      console.log('Согласен: ', this.agree)
-      console.groupEnd()
+      if (this.formIsValid()) {
+        console.group('Form Data')
+        console.log('Имя: ', this.name)
+        console.log('Имя ref: ', this.$refs.inputName.value)
+        console.log('Возраст: ', this.age)
+        console.log('Город: ', this.city)
+        console.log('Релокейт: ', this.relocate)
+        console.log('Скилы: ', this.skills)
+        console.log('Согласен: ', this.agree)
+        console.groupEnd()
+      }
+    },
+    formIsValid () {
+      let isValid = true
+      if (this.name.length === 0) {
+        this.errors.name = 'Введите имя'
+        isValid = false
+      } else {
+        this.errors.name = null
+      }
+      return isValid
     }
   }
 }
 </script>
 
 <style>
+  .form-control small {
+    color:#e53935;
+  }
 
+  .form-control.invalid input {
+    border-color:#e53935;
+;
+  }
 </style>
