@@ -17,7 +17,7 @@
         @action="active = 'three'">
         three tab </app-button>
         </div>
-        <app-text-one
+        <!-- <app-text-one
         v-if="active === 'one'"
         style="display:block"
         ></app-text-one>
@@ -27,7 +27,8 @@
         ></app-text-two>
         <app-text-three
         v-else-if="active === 'three'"
-        style="display:block"></app-text-three>
+        style="display:block"></app-text-three> -->
+        <component :is="componentName"></component>
       </div>
   </div>
 </template>
@@ -47,6 +48,15 @@ export default {
     AppTextOne,
     AppTextTwo,
     AppTextThree
+  },
+  computed: {
+    componentName () {
+      if (this.active === 'one') {
+        return 'app-text-one'
+      } else if (this.active === 'two') {
+        return 'app-text-two'
+      } else return 'app-text-three'
+    }
   }
 }
 </script>
