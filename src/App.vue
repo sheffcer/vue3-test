@@ -1,8 +1,13 @@
 <template>
   <div class="container">
     <form class="card" @submit.prevent="submitHeandler">
-      <h1>Анкета на Vue разработчика!</h1>
-      <div class="form-control" :class="{invalid: errors.name}">
+      <h1>Test!</h1>
+      <app-input
+      placeholder="Введи имя"
+      label="Как тебя зовут?"
+      v-model="name"
+      ></app-input>
+      <!-- <div class="form-control" :class="{invalid: errors.name}">
         <label for="name">Как тебя зовут?</label>
         <input
         v-model.trim="name"
@@ -10,7 +15,7 @@
         id="name"
         placeholder="Введи имя">
         <small v-if="errors.name">{{errors.name}}</small>
-      </div>
+      </div> -->
 
       <div class="form-control">
         <label for="age">Выбери возраст</label>
@@ -82,6 +87,7 @@
 
 <script>
 import AppButton from './AppButton.vue'
+import AppInput from './components/AppInput.vue'
 export default {
   data () {
     return {
@@ -98,7 +104,8 @@ export default {
     }
   },
   components: {
-    AppButton
+    AppButton,
+    AppInput
   },
   methods: {
     submitHeandler () {
@@ -136,6 +143,5 @@ export default {
 
   .form-control.invalid input {
     border-color:#e53935;
-;
   }
 </style>
