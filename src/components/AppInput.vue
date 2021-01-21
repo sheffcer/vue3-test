@@ -5,15 +5,16 @@
         type="text"
         :id="id"
         :placeholder="placeholder"
-        :value="myValue"
+        :value="modelValue"
         @change="onChange"
+        :error="error"
         >
         <small v-if="error">{{error}}</small>
       </div>
 </template>
 <script>
 export default {
-  emits: ['update:modelValue', 'change'],
+  emits: ['update:modelValue'],
   props: {
     modelValue: String,
     placeholder: String,
@@ -26,8 +27,7 @@ export default {
   },
   data () {
     return {
-      id: 'input' + Math.random(),
-      myValue: ''
+      id: 'input' + Math.random()
     }
   },
   methods: {
@@ -38,6 +38,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>

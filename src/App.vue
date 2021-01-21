@@ -5,7 +5,7 @@
       <app-input
       placeholder="Введи имя"
       label="Как тебя зовут?"
-      v-model="name"
+      v-model.trim="name"
       ></app-input>
       <!-- <div class="form-control" :class="{invalid: errors.name}">
         <label for="name">Как тебя зовут?</label>
@@ -26,8 +26,11 @@
         id="age"
         >
       </div>
-
-      <div class="form-control">
+      <app-select
+      :v-model="selected"
+      :options="options"
+      ></app-select>
+      <!-- <div class="form-control">
         <label for="city">Твой город</label>
         <select id="city" v-model="city">
           <option value="spb">Санкт-Петербург</option>
@@ -35,7 +38,7 @@
           <option value="kzn">Казань</option>
           <option value="nsk">Новосибирск</option>
         </select>
-      </div>
+      </div> -->
 
       <div class="form-checkbox">
         <span class="label">Готов к переезду в Токио?</span>
@@ -72,13 +75,26 @@
           value="router"/> Vue Router</label>
         </div>
       </div>
+      <!-- <div class="form-control">
+        <p>Черканите пару строк</p>
+      <textarea
+      id="text-aria"
+      rows="3"
+      v-model="message"
+      placeholder="введите сюда свою чухню"
+      ></textarea>
+      </div> -->
+      <app-text-area
+      v-model.trim="message"
+      title="Новая чухня"
+      placeholder="введите сюда вашу чухню"
+      ></app-text-area>
       <div class="form-checkbox">
         <span class="label">Соглашаюсь с уловиями</span>
         <div class="checkbox">
           <label><input type="checkbox" v-model="agree"/>Да</label>
         </div>
       </div>
-
       <!-- <button type="submit" class="btn primary">Отправить</button> -->
       <app-button color="primary" type="submit">{{submit}}</app-button>
     </form>
@@ -88,24 +104,44 @@
 <script>
 import AppButton from './AppButton.vue'
 import AppInput from './components/AppInput.vue'
+import AppSelect from './components/AppSelect.vue'
+// import AppTextAria from '@/components/AppTextAria'
+import AppTextArea from './components/AppTextArea.vue'
 export default {
   data () {
     return {
       name: '',
       age: 33,
-      city: 'msk',
+      selected: 'kv',
       relocate: null,
       skills: [],
       agree: false,
+      message: '',
       submit: 'Отправить',
       errors: {
         name: null
-      }
+      },
+      options: [
+        {
+          value: 'od',
+          tag: 'Одесса'
+        },
+        {
+          value: 'kv',
+          tag: 'Киев'
+        },
+        {
+          value: 'kh',
+          tag: 'Харьков'
+        }
+      ]
     }
   },
   components: {
     AppButton,
-    AppInput
+    AppInput,
+    AppSelect,
+    AppTextArea
   },
   methods: {
     submitHeandler () {
@@ -113,11 +149,12 @@ export default {
       if (this.formIsValid()) {
         console.group('Form Data')
         console.log('Имя: ', this.name)
-        console.log('Имя ref: ', this.$refs.inputName.value)
+        // console.log('Имя ref: ', this.$refs.inputName.value)
         console.log('Возраст: ', this.age)
-        console.log('Город: ', this.city)
+        console.log('Город: ', this.selected)
         console.log('Релокейт: ', this.relocate)
         console.log('Скилы: ', this.skills)
+        console.log('Текст: ', this.message)
         console.log('Согласен: ', this.agree)
         console.groupEnd()
       }
