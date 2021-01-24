@@ -27,12 +27,14 @@
         >
       </div>
       <app-select
-      :v-model="selected"
+      v-model="selected"
       :options="options"
-      ></app-select>
+      :selected="selected"
+      @change:selected="selected = $event"
+      >{{selected}}</app-select>
       <!-- <div class="form-control">
         <label for="city">Твой город</label>
-        <select id="city" v-model="city">
+        <select id="city" v-model="selected">
           <option value="spb">Санкт-Петербург</option>
           <option value="msk">Москва</option>
           <option value="kzn">Казань</option>
@@ -112,7 +114,7 @@ export default {
     return {
       name: '',
       age: 33,
-      selected: 'kv',
+      selected: 'od',
       relocate: null,
       skills: [],
       agree: false,
@@ -158,6 +160,9 @@ export default {
         console.log('Согласен: ', this.agree)
         console.groupEnd()
       }
+    },
+    changeMySelect (evt) {
+      this.selected = evt.target.value
     },
     formIsValid () {
       let isValid = true
