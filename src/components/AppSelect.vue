@@ -1,12 +1,12 @@
 <template>
   <div class="form-control">
     <label for="city">Твой город</label>
-    <select id="city" :selected="selected">
+    <select id="city" @change="onChange($event)">
       <option
       v-for="option in options"
       :key="option"
-      :value=option.value
-      @change="onSelect"
+      :value="option.value"
+       @click="$emit('input', option.value)"
       >{{option.tag}}</option>
     </select>
     </div>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  emits: ['update:value'],
+  emits: ['update:selected', 'change:selected', 'input'],
   props: {
     options: {
       type: Array,
@@ -29,7 +29,16 @@ export default {
   },
   methods: {
     onSelect (evt) {
-      this.$emit('update:value', evt.option.value)
+      this.$emit('update:selected', evt.target.value)
+      console.log(event.target.value)
+      // @changeSelect="$emit('change', $event.target.value)"
+    },
+    selectOption (option) {
+      this.$emit('input', option)
+    },
+    onChange (event) {
+      this.$emit('change:selected', event.target.value)
+      console.log(event.target.value)
     }
   }
 }
