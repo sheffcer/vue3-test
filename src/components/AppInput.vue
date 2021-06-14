@@ -33,7 +33,7 @@ export default {
   methods: {
     onChange (evt) {
       this.$emit('update:modelValue', evt.target.value)
-    },
+    }
   }
 }
 </script>
