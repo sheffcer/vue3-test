@@ -174,6 +174,12 @@ export default {
       }
       return isValid
     }
+  },
+  mounted () {
+    // const parser = require('xml2json')
+    // const xml = '<foo attr="value">bar</foo>'
+    // const json = parser.toJson(xml)
+    // console.log('to json -> %s', json)
   }
 }
 </script>
